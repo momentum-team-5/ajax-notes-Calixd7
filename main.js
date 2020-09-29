@@ -8,7 +8,8 @@ document.addEventListener('submit', function(event) {
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ notesitem : notesinput })
+        body: JSON.stringify({ notesItem : notesinput, created_at: moment().format()
+        }) 
     })
             .then(res => res.json())
     .then(data => {
