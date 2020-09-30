@@ -13,7 +13,7 @@ document.addEventListener('submit', function(event) {
     })
             .then(res => res.json())
     .then(data => {
-        const notesList = document.querySelector('#noteslist')
+        const noteslist = document.querySelector('#noteslist')
         const notesItemEl = document.createElement('li')
         notesItemEl.innerText = data.notesItem
         notesList.appendChild(notesItemEl)
@@ -22,11 +22,31 @@ document.addEventListener('submit', function(event) {
 fetch(url)
     .then(res => res.json())
     .then(notesData => {
-        const notesList = document.querySelector('#noteslist')
+        const noteslist = document.querySelector('#noteslist')
         for (const item of notesData) {
             console.log(item)
             const notesItemEl = document.createElement('li')
             notesItemEl.innerText = item.notesItem
-            notesList.appendChild(notesItemEl)
+            noteslist.appendChild(notesItemEl)
         }
     })
+    function createnotes(){
+
+    }
+    
+
+    function deletenotes (notesId) {
+        fetch(url + '/' + notesId, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => const notesToRemove = document.querySelector(`li[data-id='${notesId}']`)
+            notesToRemove.remove()
+        })
+}
+
+
+noteslist.addEventListener ('click', function (e){
+    if (e.target.matches('delete')){
+        console.log(e.target.parentElement.dataset.id)
+        deletenotes(e.target.parentElement.dataset.id)
